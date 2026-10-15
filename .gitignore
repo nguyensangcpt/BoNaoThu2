@@ -1,0 +1,19 @@
+# Video / âm thanh nặng — không đưa lên GitHub
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.mp3
+*.wav
+*.m4a
+
+# Trạng thái giao diện Obsidian (đổi liên tục, không cần sao lưu)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.trash/
+
+# Rác hệ điều hành
+Thumbs.db
+desktop.ini
+.DS_Store
