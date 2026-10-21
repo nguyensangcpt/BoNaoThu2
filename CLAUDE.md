@@ -17,7 +17,7 @@ Thay vì mỗi lần hỏi lại đi truy xuất tài liệu thô từ đầu (k
 
 | Tầng | Thư mục / file | Ai sở hữu | Quy tắc |
 |---|---|---|---|
-| 1. Nguồn thô | `raw/` (ảnh, tệp đính kèm trong `raw/assets/`) | Người dùng | **BẤT BIẾN. Chỉ đọc, KHÔNG BAO GIỜ sửa, đổi tên, xoá.** Đây là nguồn chân lý. Nguồn chính là các file phụ đề `.srt`. |
+| 1. Nguồn thô | `raw/` (ảnh, tệp đính kèm trong `raw/assets/`) | Người dùng | **BẤT BIẾN. Chỉ đọc, KHÔNG BAO GIỜ sửa, đổi tên, xoá** — trừ ngoại lệ video gốc ở mục 2.1. Đây là nguồn chân lý. Nguồn chính là các file phụ đề `.srt`. |
 | 2. Wiki | `wiki/` | Claude | Claude tạo, cập nhật, giữ liên kết chéo nhất quán. Người dùng có thể đọc và góp ý, nhưng Claude chịu trách nhiệm tính nhất quán. |
 | 3. Schema | `CLAUDE.md` (file này) | Người dùng + Claude | Quy tắc tổ chức, quy ước, quy trình. Chỉ sửa khi người dùng đồng ý; ghi thay đổi vào `wiki/log.md`. |
 | 4. Sản phẩm | `production/` | Claude (theo lệnh người dùng) | Sản phẩm đầu ra: blog, bài đăng Facebook, kịch bản video, PDF, tài liệu khác. Mọi sản phẩm phải dựa trên nội dung wiki và giữ trích dẫn khi phù hợp. |
@@ -34,6 +34,15 @@ wiki/
 ├── tom-tat-nguon/    ← mỗi nguồn trong raw/ có đúng 1 trang tóm tắt
 └── so-sanh/          ← bảng so sánh, phân tích đối chiếu
 ```
+
+### 2.1. Ngoại lệ: xoá video gốc để nhẹ bộ nhớ
+
+Video gốc (`.mp4`, `.mov`, `.mkv`, `.webm`…) trong `raw/` **được phép xoá** khi ĐỦ cả hai điều kiện:
+1. Đã có file **`.srt`** (lời chép) cùng tên, cùng thư mục — đây là nguồn chính để trích dẫn.
+2. Đã có file **`.mp3`** nén (chỉ tiếng, mono 64 kbps ≈ 0,5 MB/phút) cùng tên, cùng thư mục — để nghe lại khi chép lời không rõ.
+
+Cách làm: chỉ xoá SAU khi nạp xong vào wiki; liệt kê danh sách video + tổng dung lượng sẽ giải phóng và **chờ người dùng xác nhận** mới xoá. Ghi việc xoá vào `wiki/log.md`. File `.srt` và `.mp3` thì vẫn bất biến như mọi nguồn khác.
+Trích dẫn mốc thời gian `(nguồn: x.srt, 00:12)` vẫn đúng với file `.mp3` cùng tên.
 
 Các thư mục khác trong kho Obsidian (`00 Hộp thư`, `01 Lô đất`, …, `_Mẫu`, `_Ảnh`) là ghi chú cá nhân của người dùng — **không** thuộc wiki, không tự ý sửa.
 
@@ -75,13 +84,14 @@ Các thư mục khác trong kho Obsidian (`00 Hộp thư`, `01 Lô đất`, …,
 
 Kích hoạt khi người dùng nói: "nạp nguồn …", "đọc file …", "ingest …".
 
-1. **Đọc** file nguồn trong `raw/` (đọc toàn bộ, không sửa).
+1. **Đọc** file nguồn trong `raw/` (đọc toàn bộ, không sửa). Nguồn là video/ghi âm: chép lời ra `.srt` (whisper, tiếng Việt) và tách tiếng ra `.mp3` nén cùng tên trước — xem mục 2.1.
 2. **Trao đổi** với người dùng 3–5 ý chính vừa rút ra; hỏi cần nhấn mạnh gì, bỏ qua gì.
 3. **Viết trang tóm tắt** trong `wiki/tom-tat-nguon/` (tên file = tên nguồn dạng không dấu). Gồm: bối cảnh, ý chính có trích dẫn mốc thời gian, thực thể và khái niệm xuất hiện, câu hỏi còn mở.
 4. **Cập nhật `wiki/index.md`** — thêm mọi trang mới, sửa tóm tắt một dòng của trang đã đổi.
 5. **Cập nhật / tạo các trang thực thể và khái niệm** liên quan khắp wiki; thêm liên kết chéo hai chiều.
 6. **Ghi chú mâu thuẫn** nếu nguồn mới trái với nguồn cũ (khối `[!warning] Mâu thuẫn` trên cả hai trang liên quan).
 7. **Thêm 1 mục vào `wiki/log.md`**: `## [YYYY-MM-DD] ingest | Tên nguồn` + danh sách trang đã tạo/sửa.
+8. (Nguồn video) **Đề nghị xoá video gốc** theo mục 2.1 — chờ người dùng đồng ý.
 
 Lưu ý:
 - Một nguồn có thể chạm **10–15 trang**. Đó là bình thường — đừng tiết kiệm liên kết.

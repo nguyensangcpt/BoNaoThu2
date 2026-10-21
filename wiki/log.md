@@ -37,4 +37,9 @@ tags: [nhat-ky]
 - Tạo khái niệm: [[ty-suat-cho-thue]], [[hang-cat-lo]], [[giay-phep-xay-dung-va-pccc]], [[moi-gioi]].
 - Tạo so sánh: [[so-sanh-ty-suat-dong-tien]].
 - Cập nhật: [[dong-tien-cho-thue]] (viết lại, 2 mô hình), [[cau-chot-keu-goi]] (thêm kiểu "mời vào nhóm"), [[cau-truc-video-review-bds]] (thêm dạng video chuyên gia), [[phap-ly-so-hong]], [[index]], [[tong-quan]].
+- (Ghi chú 2026-10-21: video gốc của thư mục này đã được người dùng xoá trước khi có quy tắc 2.1 — chỉ còn `.srt`, không có `.mp3`.)
 - Mâu thuẫn ghi nhận: dong-tien-1 nêu tỷ suất lúc 10–12%, lúc 12–15%, lúc 10–15%; ví dụ cụ thể chỉ ≈ 9,6%. Góc nhìn khác nhau: dong-tien-1 "mua rẻ tự xây" vs dong-tien-2 "chấp nhận mua đắt mà đúng luật".
+
+## [2026-10-21] schema | Cho phép xoá video gốc sau khi có .srt + .mp3
+- Thêm mục 2.1 vào `CLAUDE.md`: video gốc trong `raw/` được xoá khi đã có `.srt` và `.mp3` nén cùng tên, sau khi nạp xong và người dùng xác nhận.
+- Thêm bước 8 vào quy trình nạp nguồn: đề nghị xoá video gốc.
